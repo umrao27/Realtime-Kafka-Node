@@ -199,3 +199,15 @@ Group : user-2 | Topic : rider-updates | Partition: 1 | message: {"riderName":"R
 Rahul Umrao
 
 ---
+
+## Images
+
+Below are some visual diagrams and screenshots related to the project. Place your images in the `images/` folder and reference them here:
+
+### Architecture Diagram
+
+![Architecture Diagram](images/architecture.png)
+
+### Example Output Screenshot
+
+![Example Output](images/example.png)
