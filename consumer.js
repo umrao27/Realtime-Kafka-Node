@@ -1,11 +1,14 @@
 /**
- * The function initializes a Kafka consumer that subscribes to a topic, listens for new messages, and
- * logs the received messages.
+ * The above function initializes a Kafka consumer that subscribes to the "rider-updates" topic and
+ * listens for new messages, logging the group, topic, partition, and message value for each received
+ * message.
  */
+
 const { kafka } = require('./client');
+const group = process.argv[2] || "test-group";
 
 async function init() {
-    const consumer = kafka.consumer({ groupId: "test-group" });
+    const consumer = kafka.consumer({ groupId: group });
     await consumer.connect();
     console.log("Connected!");
 
@@ -17,7 +20,7 @@ async function init() {
     await consumer.run({
         eachMessage: async ({ topic, partition, message }) => {
            console.log(
-            `Topic : ${topic} | Partition: ${partition} | message: ${message.value.toString()}`
+            `Group : ${group} | Topic : ${topic} | Partition: ${partition} | message: ${message.value.toString()}`
             );
         }
     });

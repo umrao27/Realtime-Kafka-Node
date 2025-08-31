@@ -2,19 +2,27 @@
 
 A modern Node.js application demonstrating real-time messaging with Apache Kafka using the [KafkaJS](https://kafka.js.org/) library. This project covers the full lifecycle: creating topics, producing events, and consuming messages, making it ideal for learning or prototyping distributed systems and event-driven architectures.
 
+## Table of Contents
+
+- [Prerequisites](#prerequisites)
+- [Commands](#commands)
+- [Installation](#installation)
+- [Project Structure](#project-structure)
+- [Usage](#usage)
+- [Example Scenarios](#example-scenarios)
+- [Troubleshooting](#troubleshooting)
+- [Author](#author)
+- [License](#license)
+
 ## Prerequisites
 
 - Knowledge
-
   - Node.JS Intermediate level
   - Experience with designing distributed systems
-
 - Tools
-
   - Node.js: [Node.js](https://nodejs.org/en)
   - Docker: [Download Docker](https://www.docker.com/)
   - VsCode: [VsCode Download](https://code.visualstudio.com/)
-
 - Apache Kafka and Zookeeper running and accessible at `localhost:9092`
 - Network access to the Kafka broker from your machine
 
@@ -89,13 +97,94 @@ Start the consumer to listen for messages:
 node consumer.js
 ```
 
-## Example Output
+## Example Scenarios
 
-When running the producer and consumer, you should see output similar to:
+### Scenario 1: Single Consumer Group ([`user-1`](consumer.js)) with Two Partitions (north, south)
+
+- **Consumer Group:** user-1
+- **Partitions:** north, south
+
+**Step 1:**
+Run the producer and send the first message ([`producer.js`](producer.js)):
 
 ```sh
-Topic : rider-updates | Partition: 0 | message: {"name":"Rahul","location":"Bengaluru"}
+node producer.js
 ```
+
+Input:
+
+```
+Rahul north
+```
+
+**Output:**
+
+```
+Group : user-1 | Topic : rider-updates | Partition: 0 | message: {"riderName":"Rahul","location":"north"}
+```
+
+**Step 2:**
+Send another message:
+
+```
+Rahul south
+```
+
+**Output:**
+
+```
+Group : user-1 | Topic : rider-updates | Partition: 0 | message: {"riderName":"Rahul","location":"north"}
+Group : user-1 | Topic : rider-updates | Partition: 1 | message: {"riderName":"Rahul","location":"south"}
+```
+
+---
+
+#### How Partition Mapping Works
+
+Messages are assigned to partitions based on the location field (e.g., 'north' goes to partition 0, 'south' to partition 1).
+
+---
+
+### Scenario 2: Two Consumer Groups ([`user-1`](consumer.js) and [`user-2`](consumer.js)) with Two Partitions (north, south)
+
+- **Consumer Groups:** user-1, user-2
+- **Partitions:** north, south
+
+**Step 1:**
+Run the producer and send the first message ([`producer.js`](producer.js)):
+
+```sh
+node producer.js
+```
+
+Input:
+
+```
+Rahul north
+```
+
+**Output:**
+
+```
+Group : user-1 | Topic : rider-updates | Partition: 0 | message: {"riderName":"Rahul","location":"north"}
+Group : user-2 | Topic : rider-updates | Partition: 0 | message: {"riderName":"Rahul","location":"north"}
+```
+
+**Step 2:**
+Send another message:
+
+```
+Rahul south
+```
+
+**Output:**
+
+```
+Group : user-1 | Topic : rider-updates | Partition: 1 | message: {"riderName":"Rahul","location":"south"}
+Group : user-2 | Topic : rider-updates | Partition: 1 | message: {"riderName":"Rahul","location":"south"}
+```
+
+---
 
 ## Troubleshooting
 
@@ -103,6 +192,10 @@ Topic : rider-updates | Partition: 0 | message: {"name":"Rahul","location":"Beng
 - If you see `The group coordinator is not available`, check your Kafka broker configuration (`advertised.listeners`, network/firewall, broker logs).
 - You can change the broker address in [`client.js`](client.js) if needed.
 
+---
+
 ## Author
 
 Rahul Umrao
+
+---
