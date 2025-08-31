@@ -102,3 +102,7 @@ Topic : rider-updates | Partition: 0 | message: {"name":"Rahul","location":"Beng
 - Ensure Kafka and Zookeeper are running and accessible at the broker address in [`client.js`](client.js).
 - If you see `The group coordinator is not available`, check your Kafka broker configuration (`advertised.listeners`, network/firewall, broker logs).
 - You can change the broker address in [`client.js`](client.js) if needed.
+
+## Author
+
+Rahul Umrao
