@@ -206,8 +206,8 @@ Below are some visual diagrams and screenshots related to the project. Place you
 
 ### Architecture Diagram
 
-![Architecture Diagram](images/architecture.png)
+![Architecture Diagram](images/Architecture.png)
 
 ### Example Output Screenshot
 
-![Example Output](images/example.png)
+![Example Output](images/Example.png)
