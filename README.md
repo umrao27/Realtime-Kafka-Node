@@ -5,14 +5,15 @@ A modern Node.js application demonstrating real-time messaging with Apache Kafka
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
+- [Architecture Diagram](#architecture-diagram)
 - [Commands](#commands)
 - [Installation](#installation)
 - [Project Structure](#project-structure)
 - [Usage](#usage)
 - [Example Scenarios](#example-scenarios)
+
 - [Troubleshooting](#troubleshooting)
 - [Author](#author)
-- [License](#license)
 
 ## Prerequisites
 
@@ -25,6 +26,12 @@ A modern Node.js application demonstrating real-time messaging with Apache Kafka
   - VsCode: [VsCode Download](https://code.visualstudio.com/)
 - Apache Kafka and Zookeeper running and accessible at `localhost:9092`
 - Network access to the Kafka broker from your machine
+
+### Architecture Diagram
+
+Below are some visual diagrams and screenshots related to the project. Place your images in the `images/` folder and reference them here:
+
+![Architecture Diagram](images/Architecture.png)
 
 ## Commands
 
@@ -199,15 +206,3 @@ Group : user-2 | Topic : rider-updates | Partition: 1 | message: {"riderName":"R
 Rahul Umrao
 
 ---
-
-## Images
-
-Below are some visual diagrams and screenshots related to the project. Place your images in the `images/` folder and reference them here:
-
-### Architecture Diagram
-
-![Architecture Diagram](images/Architecture.png)
-
-### Example Output Screenshot
-
-![Example Output](images/Example.png)
